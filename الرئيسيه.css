@@ -1,0 +1,13 @@
+.title_text{
+text-align: right;
+direction: rtl;
+
+
+}
+.p_text{
+    text-align: right;
+    direction: rtl;
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+    }

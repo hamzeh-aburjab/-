@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>وزارة التجارة - تسجيل سجل تجاري</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: #f1f1f1;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #004d40;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #00695c;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px 0;
+      flex-wrap: wrap;    }
+
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 6px;
+    }
+    nav a:hover {
+      background-color: #004d40;
+    }
+    main {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    h1, h2 {
+      color: #dae0df;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #004d40;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #00695c;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>وزارة التجارة - ولاية سان أندرياس</h1>
+</header>
+<nav>
+  <ul style="list-style: none; display: flex; justify-content: center; gap: 20px; padding: 10px; background-color: #004d40;">
+    <li><a href="الرئيسيه.html">الرئيسية</a></li>
+    <li><a href="الأخبار.html">الأخبار</a></li>
+    <li><a href="قوانين.HTML">القوانين</a></li>
+    <li><a href="تسجيل سجل تجاري.HTML">تسجيل سجل تجاري</a></li>
+    <li><a href="تواصل معنا.HTML">تواصل معنا</a></li>
+  </ul>
+</nav>
+<main>
+  <form>
+    <script>
+      const form = document.querySelector("form");
+    
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+    
+        const formData = {
+          fullname: form.fullname.value,
+          business_name: form.business_name.value,
+          activity_type: form.activity_type.value,
+          location: form.location.value,
+          phone: form.phone.value,
+          license_duration: form.license_duration.value,
+          notes: form.notes.value
+        };
+    
+        fetch("https://script.google.com/macros/s/AKfycbyJ9yamVRc6i7jnBYXg23kP80QP2ooy2dUmrAj2eKgo1J-fOLOB-RhDGKprkJIRqp4p/exec", { // <-- استبدل بالرابط الخاص فيك
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => res.text())
+        .then(msg => {
+          alert(msg); // أو تقدر تعرضها في صفحة بدل alert
+          form.reset();
+        })
+        .catch(err => {
+          console.error("Error:", err);
+          alert("حدث خطأ أثناء إرسال الطلب ❌");
+        });
+      });
+    </script>
+    
+    <label>الاسم الثلاثي</label>
+    <input type="text" name="fullname" required>
+
+    <label>اسم النشاط التجاري</label>
+    <input type="text" name="business_name" required>
+
+    <label>نوع النشاط</label>
+    <select name="activity_type" required>
+      <option value="">اختر نوع النشاط</option>
+      <option value="مطعم">مطعم</option>
+      <option value="متجر ملابس">متجر ملابس</option>
+      <option value="ورشة سيارات">ورشة سيارات</option>
+      <option value="مكتب خدمات">مكتب خدمات</option>
+      <option value="شركة أمنية">شركة أمنية</option>
+    </select>
+
+    <label>موقع النشاط (اسم الشارع أو الحي)</label>
+    <input type="text" name="location" required>
+
+    <label>رقم التواصل (جوال داخل اللعبة)</label>
+    <input type="tel" name="phone" required>
+
+    <label>مدة الترخيص المطلوبة</label>
+    <select name="license_duration" required>
+      <option value="">اختر المدة</option>
+      <option value="أسبوع">أسبوع</option>
+      <option value="شهر">شهر</option>
+      <option value="3 شهور">3 شهور</option>
+    </select>
+
+    <label>ملاحظات إضافية (اختياري)</label>
+    <textarea name="notes" rows="4"></textarea>
+
+    <button type="submit">إرسال الطلب</button>
+  </form>
+
+  
+  
+  
+</main>
+
+<footer>
+  © وزارة التجارة - ولاية سان أندرياس - 2025
+</footer>
+
+</body>
+</html>
